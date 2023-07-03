@@ -8,13 +8,60 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State public var currentYear = 2023
+    @State public var imageNumber = 3
+    
     var body: some View {
+        
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
+
+            Text(String(currentYear))
+                .font(.largeTitle)
+                .fontWeight(.black)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            
+            Image("image\(imageNumber)")
+                .resizable()
+                .scaledToFill()
+                .padding()
+
+
+            HStack {
+                Button {
+                    currentYear -= 1
+                    
+                   if imageNumber > 0
+                    {
+                       imageNumber -= 1
+                   } else {
+                       imageNumber = 11
+                   }
+                } label: {
+                Image(systemName: "chevron.left")
+            }
+                
+                Spacer()
+                
+                Button {
+                    currentYear += 1
+                    
+                    if imageNumber < 11
+                     {
+                        imageNumber += 1
+                    } else {
+                        imageNumber = 0
+                    }
+                } label: {
+                    Image(systemName: "chevron.right")
+                }
+               
+            }
+            .font(.largeTitle)
+            .fontWeight(.black)
+            
         }
+        .buttonStyle(.borderedProminent)
         .padding()
     }
 }
